@@ -1,0 +1,32 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: minio-server-certs
+  namespace: minio
+  labels:
+    app.kubernetes.io/name: minio
+spec:
+  isCA: true
+  secretName: minio-server-certs
+  duration: 9000h
+  renewBefore: 180h
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
+    - client auth
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  subject:
+    organizations:
+      - minio
+  dnsNames:
+    - "localhost"
+    - "127.0.0.1"
+    - "*.minio.minio.svc.cluster.local"
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io

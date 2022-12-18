@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - service.yml
+  - serviceaccount.yml
+  - statefulset.yml
+  - clusterissuer.yml
+  - root-secret.yml
+  - certificate.yml
+  - debug-certificate.yml
+  - debug-deployment-pvc.yml
+  - debug-deployment.yml
