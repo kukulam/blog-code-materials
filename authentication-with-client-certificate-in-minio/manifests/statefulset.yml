@@ -71,6 +71,8 @@ spec:
                 secretKeyRef:
                   name: minio-root
                   key: password
+            - name: MINIO_IDENTITY_TLS_ENABLE
+              value: on
           volumeMounts:
             - name: data
               mountPath: /data/db

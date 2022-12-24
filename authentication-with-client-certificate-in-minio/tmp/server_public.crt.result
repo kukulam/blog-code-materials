@@ -1,0 +1,59 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            e6:7f:d2:66:56:e4:b4:e7:9c:4b:36:da:fc:aa:b9:ba
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: O=minio
+        Validity
+            Not Before: Dec 18 12:29:21 2022 GMT
+            Not After : Dec 28 12:29:21 2023 GMT
+        Subject: O=minio
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:bc:30:1e:95:0a:7f:9a:71:67:07:4e:9b:e5:cb:
+                    98:52:5a:b4:4e:7e:4a:66:d2:91:40:2e:01:72:1e:
+                    ef:3a:72:50:7d:fd:56:af:58:35:03:92:18:15:fd:
+                    eb:54:e2:9c:22:ac:b9:7b:80:b8:38:d1:53:3d:53:
+                    45:3a:c5:75:63:9b:94:c0:1c:f2:27:fa:30:d2:23:
+                    a0:55:ea:9b:20:ee:4b:13:92:59:fd:22:7a:95:2f:
+                    26:76:30:96:bd:85:e1:92:bd:72:2c:4c:47:1d:7b:
+                    cb:48:bd:5a:1a:7f:2a:e0:12:98:75:8b:09:e6:3e:
+                    2c:bc:cd:15:d2:2e:12:73:6d:9d:02:c2:f0:c6:76:
+                    d5:cd:26:d2:c5:0d:16:f5:8a:f9:43:ff:9f:10:50:
+                    af:cc:63:dd:87:9b:fc:07:69:95:7c:15:aa:5c:1c:
+                    ac:99:79:63:1c:e7:d3:de:90:3c:a3:4b:0d:12:5f:
+                    be:6b:61:61:7d:40:08:fd:77:87:4b:12:5d:9e:ad:
+                    d0:ed:3a:4d:be:1a:a5:ee:e5:90:6e:e5:c6:f3:2b:
+                    b6:11:7b:ba:d5:49:7b:26:2e:e6:35:95:61:ce:74:
+                    8f:40:6b:6d:70:a7:23:19:5a:5d:de:64:0a:57:10:
+                    e3:b2:b6:81:e1:37:77:f0:75:8f:2f:ec:c0:77:11:
+                    57:21
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Key Usage: critical
+                Digital Signature, Key Encipherment
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication, TLS Web Client Authentication
+            X509v3 Basic Constraints: critical
+                CA:FALSE
+            X509v3 Subject Alternative Name: 
+                DNS:localhost, DNS:127.0.0.1, DNS:*.minio.minio.svc.cluster.local
+    Signature Algorithm: sha256WithRSAEncryption
+         1d:43:7b:c4:f2:62:7c:27:26:f9:4a:5b:c7:4f:ac:74:c5:c3:
+         e0:9e:2e:99:2b:44:df:50:71:35:d3:b2:1a:2c:4e:74:87:5e:
+         0d:65:fe:16:50:c1:30:d5:c5:a0:99:ae:9a:0c:b8:9a:30:74:
+         2e:9d:e0:fb:2a:df:71:3d:20:9a:56:e0:40:a8:8b:9f:1c:30:
+         c8:c2:ce:97:8f:47:6a:bc:03:80:60:5b:d9:56:b4:23:d0:33:
+         91:cd:a0:29:ec:7f:1a:96:14:b1:69:6c:16:82:37:2e:d6:dd:
+         60:27:d0:1c:c2:cf:cd:ff:fa:d5:7d:7a:e2:36:1a:cd:7d:af:
+         2d:47:04:de:6d:7f:43:48:12:5c:18:00:05:7d:2a:52:4c:7e:
+         f2:e8:7d:b6:e9:f7:7d:6c:55:e9:67:0c:ce:ce:ba:bf:88:0a:
+         87:1d:e0:92:d0:b9:2d:1b:3f:e0:75:a3:fd:2b:89:fa:db:5f:
+         31:d4:b4:4b:6f:10:38:54:81:b6:56:0b:3e:21:33:b8:12:cb:
+         9d:91:2e:39:18:88:9f:58:35:85:62:92:61:33:70:ad:05:e1:
+         92:74:2e:5b:cb:be:ad:f1:dd:39:b7:d3:e8:a0:69:e0:8a:14:
+         91:ae:78:3c:3c:32:40:25:3f:08:28:30:ca:a5:22:8d:84:f4:
+         1e:ca:e5:55

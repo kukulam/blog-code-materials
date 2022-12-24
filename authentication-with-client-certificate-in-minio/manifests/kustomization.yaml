@@ -5,9 +5,11 @@ resources:
   - service.yml
   - serviceaccount.yml
   - statefulset.yml
-  - clusterissuer.yml
+  - issuer.yml
+  - issuer-secrets.yml
   - root-secret.yml
   - certificate.yml
   - debug-certificate.yml
+  - readonly-certificate.yml
   - debug-deployment-pvc.yml
   - debug-deployment.yml

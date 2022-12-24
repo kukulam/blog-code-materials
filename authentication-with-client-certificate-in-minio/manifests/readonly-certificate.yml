@@ -1,12 +1,14 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: minio-debug-certs
+  name: minio-readonly-certs
   namespace: minio
   labels:
     app.kubernetes.io/name: minio
 spec:
-  secretName: minio-debug-certs
+  isCA: false
+  secretName: minio-readonly-certs
+  commonName: readonly
   duration: 9000h
   renewBefore: 180h
   usages:

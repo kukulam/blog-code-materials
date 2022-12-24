@@ -22,10 +22,10 @@ installCertManager:
 apply:
 	kubectl apply -k ./manifests/
 
-# 7. (optional) delete k8s cluster
+# (optional) delete k8s cluster
 deleteCluster:
 	kind delete cluster --name minio
 
-
-
-
+# (optional) delete k8s namespace
+deleteNamespace:
+	kubectl delete namespace minio

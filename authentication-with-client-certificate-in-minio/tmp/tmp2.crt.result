@@ -1,0 +1,64 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            88:7a:66:7c:00:31:78:1e:eb:e0:fa:0e:0d:23:46:fa
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: CN=joshvanl
+        Validity
+            Not Before: Dec 18 19:43:22 2022 GMT
+            Not After : Dec 28 19:43:22 2023 GMT
+        Subject: CN=test
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:ba:43:4b:8f:00:8c:fc:51:2e:d1:54:14:35:0a:
+                    24:1f:71:d5:35:3b:0a:3c:ec:54:68:67:0d:3c:59:
+                    54:61:ed:79:39:a9:69:e7:8f:51:b7:2d:ee:d5:9e:
+                    c1:a8:d8:eb:43:f5:d7:16:e0:51:0f:0d:f1:66:40:
+                    d3:57:e4:64:f3:f3:b1:fa:dc:06:41:03:c6:74:b3:
+                    b7:d0:20:e8:68:25:fa:88:8d:10:cc:a7:d4:8e:51:
+                    85:64:e9:a5:4c:ae:4a:aa:00:23:db:46:b1:f9:66:
+                    1f:e7:0d:12:a8:df:dc:31:99:9d:dc:2b:3a:84:95:
+                    8f:27:a4:02:5b:b2:20:86:1d:3f:c4:38:ff:7a:af:
+                    ab:e4:dc:fb:dd:c4:e1:02:61:e8:39:34:2b:2a:b1:
+                    d5:ff:46:6f:c6:17:cb:00:b2:6c:78:27:ce:22:9b:
+                    0f:17:d4:9f:d2:c2:e0:c3:da:ff:24:bb:f7:09:5f:
+                    b4:a6:83:d2:b2:0c:af:c6:d1:4e:65:37:dc:78:0f:
+                    86:f5:91:50:a2:f5:6d:ec:5f:67:f3:ad:19:7c:e3:
+                    96:dd:f7:25:9e:38:75:de:ea:8c:8c:ef:04:6f:8c:
+                    9f:23:4f:34:d1:e8:f0:05:b5:9c:fb:2a:f4:e4:fe:
+                    f3:db:40:4c:11:e4:cc:ac:2b:68:94:1f:fc:2b:a4:
+                    e3:59
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Key Usage: critical
+                Digital Signature, Key Encipherment, Certificate Sign
+            X509v3 Extended Key Usage:
+                TLS Web Server Authentication, TLS Web Client Authentication
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 Subject Key Identifier:
+                69:2E:0B:67:C0:E1:58:D5:7C:C9:C7:D9:60:5D:B0:10:E0:32:C2:04
+            X509v3 Authority Key Identifier:
+                keyid:26:97:97:53:01:98:B1:14:A8:63:F7:7C:2E:71:15:A1:6A:8F:ED:42
+
+            X509v3 Subject Alternative Name:
+                DNS:localhost, DNS:127.0.0.1, DNS:*.minio.minio.svc.cluster.local
+    Signature Algorithm: sha256WithRSAEncryption
+         16:1b:c4:ae:c3:96:d9:79:90:70:5b:f8:27:37:fc:e4:c7:3d:
+         d1:f0:73:69:af:70:ef:ba:9f:65:ad:b6:30:0e:da:fe:27:20:
+         7f:33:99:79:b6:f9:aa:72:8e:0e:42:29:00:6b:d1:ba:ff:22:
+         05:ad:65:22:90:d2:45:dd:1e:75:7e:0b:eb:a0:d3:40:0a:04:
+         cc:5c:c6:df:1d:35:b0:88:62:97:f8:c8:56:38:ef:ba:53:e8:
+         cf:56:f3:66:1f:8f:5a:1b:ad:60:64:fd:06:cf:7a:49:c4:0b:
+         aa:85:7b:2f:47:7d:2e:48:37:68:51:75:54:e5:8e:73:24:86:
+         06:35:fe:1c:2f:3f:8f:7b:2c:61:9f:a5:6a:00:87:6b:6a:41:
+         23:35:29:17:bd:9e:6b:e1:a8:9b:b3:c1:a0:1a:49:5a:99:0e:
+         20:f5:e9:b7:91:86:1e:8e:d4:00:d6:05:5e:3e:cd:84:bb:70:
+         19:8f:5d:25:e0:f6:d6:f0:ab:da:33:a3:a9:64:0a:f2:ba:39:
+         6f:43:99:de:0e:0e:5d:e7:00:50:7d:60:c3:2a:36:2b:e2:85:
+         d6:32:3f:18:06:10:33:63:db:f8:c9:20:a4:28:54:1d:46:da:
+         aa:14:ba:02:bd:26:6b:f4:e4:8a:f6:00:89:f6:5b:86:8c:be:
+         12:f8:3a:90

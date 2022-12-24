@@ -41,7 +41,7 @@ spec:
 
               mkdir -p .mc/certs/CAs
               cp .mc/certs/ca.crt .mc/certs/CAs/ca.crt
-
+                
               echo "successfully copied certs"
           volumeMounts:
             - name: certs-secrets
@@ -89,6 +89,23 @@ spec:
             - name: data
               mountPath: .mc
               readOnly: false
+        - name: aws-cli
+          image: amazon/aws-cli:2.9.8
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65534
+            runAsGroup: 65534
+          command: [ "sh" ]
+          args: [ "-c", "sleep infinity" ]
+          volumeMounts:
+            - name: data
+              mountPath: /.aws
+              readOnly: false
+              subPath: .aws
+            - name: readonly-certs-secrets
+              mountPath: /tmp/minio/readonly-certs
+            - name: certs-secrets
+              mountPath: /tmp/minio/certs
       volumes:
         - name: data
           persistentVolumeClaim:
@@ -104,6 +121,21 @@ spec:
                       mode: 256
                     - key: tls.key
                       path: private.key
+                      mode: 256
+        - name: readonly-certs-secrets
+          projected:
+            sources:
+              - secret:
+                  name: minio-readonly-certs
+                  items:
+                    - key: tls.crt
+                      path: public.crt
+                      mode: 256
+                    - key: tls.key
+                      path: private.key
+                      mode: 256
+                    - key: ca.crt
+                      path: ca.crt
                       mode: 256
         - name: certs-secrets
           projected:
