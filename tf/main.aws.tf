@@ -16,15 +16,20 @@ resource "aws_s3_bucket_lifecycle_configuration" "versioned_bucket_lifecycle" {
   bucket = aws_s3_bucket.versioned_bucket.id
 
   rule {
-    id      = "expire-objects"
+    id      = "expire-objects-current-version"
     status  = "Enabled"
 
     expiration {
       days = 30
     }
+  }
+
+  rule {
+    id      = "expire-objects-noncurrent-version"
+    status  = "Enabled"
 
     noncurrent_version_expiration {
-      days = 30
+      noncurrent_days = 7
     }
   }
 }
