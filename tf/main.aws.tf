@@ -22,6 +22,9 @@ resource "aws_s3_bucket_lifecycle_configuration" "versioned_bucket_lifecycle" {
     expiration {
       days = 30
     }
-  }
 
+    noncurrent_version_expiration {
+      days = 30
+    }
+  }
 }
