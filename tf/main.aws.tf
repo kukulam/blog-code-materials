@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "locked_versioned_bucket" {
-  bucket = "kukulam-locked-bucket-name"
+  bucket = "kukulam-locked-versioned-bucket-name"
 
   object_lock_enabled = true
 }
