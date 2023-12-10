@@ -6,19 +6,15 @@ resource "google_storage_bucket" "my_locked_versioned_bucket" {
   }
   retention_policy {
     locked = true
-  }
-}
-
-resource "google_storage_bucket_lifecycle_rule" "expire_rule" {
-  count = 1
-
-  action {
-    type = "Delete"
+    retention_period = 2592000 # 30 days
   }
 
-  condition {
-    age = 30
+  lifecycle_rule {
+    condition {
+      age  = 30
+    }
+    action {
+      type = "Delete"
+    }
   }
-
-  depends_on = [google_storage_bucket.my_locked_versioned_bucket]
 }
