@@ -1,5 +1,5 @@
 resource "google_storage_bucket" "my_locked_versioned_bucket" {
-  name          = "my-locked-versioned-gcs-bucket"
+  name          = "kukulam-gcs-locked-versioned-bucket"
   location      = "US"
   versioning {
     enabled = true

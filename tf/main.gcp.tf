@@ -1,6 +1,9 @@
-resource "google_storage_bucket" "my_bucket" {
-  name          = "kukulam-gcs-simple-bucket"
+resource "google_storage_bucket" "my_versioned_bucket" {
+  name          = "kukulam-gcs-versioned-bucket"
   location      = "US"
+  versioning {
+    enabled = true
+  }
 
   lifecycle_rule {
     condition {
