@@ -1,48 +1,20 @@
-resource "aws_s3_bucket" "locked_versioned_bucket" {
-  bucket = "kukulam-locked-versioned-bucket-name"
+resource "google_storage_bucket" "my_locked_versioned_bucket" {
+  name          = "kukulam-gcs-locked-versioned-bucket"
+  location      = "US"
+  versioning {
+    enabled = true
+  }
+  retention_policy {
+    locked = true
+    retention_period = 2592000 # 30 days
+  }
 
-  object_lock_enabled = true
-}
-
-resource "aws_s3_bucket_object_lock_configuration" "locking" {
-  bucket = aws_s3_bucket.locked_versioned_bucket.id
-
-  rule {
-    default_retention {
-      mode = "COMPLIANCE"
-      days = 90
+  lifecycle_rule {
+    condition {
+      age  = 30
     }
-  }
-}
-
-resource "aws_s3_bucket_versioning" "versioning" {
-  bucket = aws_s3_bucket.locked_versioned_bucket.id
-
-  versioning_configuration {
-    status = "Enabled"
-  }
-}
-
-resource "aws_s3_bucket_lifecycle_configuration" "versioned_bucket_lifecycle" {
-  depends_on = [aws_s3_bucket_versioning.versioning]
-
-  bucket = aws_s3_bucket.locked_versioned_bucket.id
-
-  rule {
-    id      = "expire-objects-current-version"
-    status  = "Enabled"
-
-    expiration {
-      days = 30
-    }
-  }
-
-  rule {
-    id      = "expire-objects-noncurrent-version"
-    status  = "Enabled"
-
-    noncurrent_version_expiration {
-      noncurrent_days = 7
+    action {
+      type = "Delete"
     }
   }
 }

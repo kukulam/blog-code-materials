@@ -1,13 +1,16 @@
-resource "google_storage_bucket" "my_bucket" {
-  name          = "kukulam-gcs-simple-bucket"
-  location      = "US"
+resource "aws_s3_bucket" "example_bucket" {
+  bucket = "kukulam-example-bucket-name"
+}
 
-  lifecycle_rule {
-    condition {
-      age  = 30
-    }
-    action {
-      type = "Delete"
+resource "aws_s3_bucket_lifecycle_configuration" "example_bucket_lifecycle" {
+  bucket = aws_s3_bucket.example_bucket.id
+
+  rule {
+    id      = "expire-objects"
+    status  = "Enabled"
+
+    expiration {
+      days = 30
     }
   }
 }
