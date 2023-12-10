@@ -8,14 +8,6 @@ resource "google_storage_bucket" "my_versioned_bucket" {
   lifecycle_rule {
     condition {
       age  = 30
-    }
-    action {
-      type = "Delete"
-    }
-  }
-
-  lifecycle_rule {
-    condition {
       days_since_noncurrent_time = 7
     }
     action {
