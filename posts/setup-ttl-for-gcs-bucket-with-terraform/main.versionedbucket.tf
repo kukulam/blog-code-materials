@@ -13,4 +13,13 @@ resource "google_storage_bucket" "my_versioned_bucket" {
       type = "Delete"
     }
   }
+
+  lifecycle_rule {
+    condition {
+      days_since_noncurrent_time = 7
+    }
+    action {
+      type = "Delete"
+    }
+  }
 }

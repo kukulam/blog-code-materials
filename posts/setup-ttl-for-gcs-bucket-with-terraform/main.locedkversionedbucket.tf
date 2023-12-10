@@ -5,13 +5,22 @@ resource "google_storage_bucket" "my_locked_versioned_bucket" {
     enabled = true
   }
   retention_policy {
-    locked = true
-    retention_period = 2592000 # 30 days
+    is_locked = true
+    retention_period = 7776000 # 90 days
   }
 
   lifecycle_rule {
     condition {
-      age  = 30
+      age = 30
+    }
+    action {
+      type = "Delete"
+    }
+  }
+
+  lifecycle_rule {
+    condition {
+      days_since_noncurrent_time = 7
     }
     action {
       type = "Delete"
