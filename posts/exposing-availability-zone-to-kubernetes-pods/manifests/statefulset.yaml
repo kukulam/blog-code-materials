@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: opensearch
+  namespace: opensearch
+  labels:
+    app: opensearch
+spec:
+  serviceName: "opensearch"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: opensearch
+  template:
+    metadata:
+      labels:
+        app: opensearch
+    spec:
+      serviceAccountName: opensearch-sa
+      initContainers:
+        - name: init-az
+          image: curlimages/curl:8.8.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Node name: $NODE_NAME"
+              API_URL="https://kubernetes.default.svc/api/v1/nodes/$NODE_NAME"
+              TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+              CA_CERT="/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+              
+              # Perform the HTTP request and capture the status code and body
+              RESPONSE_FILE="/tmp/response.txt"
+              RESPONSE=$(curl --write-out "HTTPSTATUS:%{http_code}" --silent --output $RESPONSE_FILE --cacert $CA_CERT -H "Authorization: Bearer $TOKEN" $API_URL)
+
+              # Extract the HTTP status code
+              HTTP_STATUS=$(echo "$RESPONSE" | sed -e 's/.*HTTPSTATUS://')
+
+              # Check if the status code is 200
+              if [ "$HTTP_STATUS" -ne 200 ]; then
+                echo "Failed to fetch node information. HTTP Status: $HTTP_STATUS"
+                exit 1
+              fi
+
+              # Extract the az from label
+              AZ=$(awk -F'"' '/topology.kubernetes.io\/zone/ {print $4}' $RESPONSE_FILE)
+
+              echo "Node label 'topology.kubernetes.io/zone': $AZ"
+              echo -n $AZ > /etc/opensearch/config/node-zone.txt
+          volumeMounts:
+            - name: kube-api-access
+              mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+            - name: az-config
+              mountPath: /etc/opensearch/config/
+      containers:
+        - name: opensearch
+          image: opensearchproject/opensearch:2.15.0
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - "AZ=$(cat /etc/opensearch/config/node-zone.txt) && ./opensearch-docker-entrypoint.sh opensearch -Enode.attr.zone=${AZ} -Ecluster.routing.allocation.awareness.attributes=zone -Ecluster.routing.allocation.awareness.force.zone.values=us-east-1a,us-east-1b,us-east-1c "
+          ports:
+            - containerPort: 9200
+              name: http
+            - containerPort: 9300
+              name: transport
+          volumeMounts:
+            - name: opensearch-data
+              mountPath: /usr/share/opensearch/data
+            - name: az-config
+              mountPath: /etc/opensearch/config/
+          resources:
+            limits:
+              cpu: "500m"
+          env:
+            - name: OPENSEARCH_INITIAL_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: opensearch-admin-secret
+                  key: OPENSEARCH_INITIAL_ADMIN_PASSWORD
+            - name: discovery.seed_hosts
+              value: "opensearch-0.opensearch,opensearch-1.opensearch,opensearch-2.opensearch"
+            - name: cluster.initial_cluster_manager_nodes
+              value: "opensearch-0,opensearch-1,opensearch-2"
+      volumes:
+        - name: az-config
+          emptyDir: {}
+        - name: kube-api-access
+          projected:
+            sources:
+              - serviceAccountToken:
+                  path: token
+                  expirationSeconds: 3600
+              - configMap:
+                  name: kube-root-ca.crt
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+  volumeClaimTemplates:
+    - metadata:
+        name: opensearch-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi
